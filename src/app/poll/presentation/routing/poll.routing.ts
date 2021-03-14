@@ -1,8 +1,9 @@
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { PollComponent } from '../poll/poll.component';
-import { PollListComponent } from '../poll-list/poll-list.component';
+import { RouterModule, Routes } from '@angular/router';
+import { EditPollComponent } from '../edit-poll/edit-poll.component';
 import { NewPollComponent } from '../new-poll/new-poll.component';
+import { PollListComponent } from '../poll-list/poll-list.component';
+import { PollComponent } from '../poll/poll.component';
 
 /**
  * app
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: PollListComponent },
       { path: 'new', component: NewPollComponent },
+      { path: ':id/edit', component: EditPollComponent },
     ]
   }
 ];

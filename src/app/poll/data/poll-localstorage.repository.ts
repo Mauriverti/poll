@@ -12,10 +12,14 @@ export class PollLocalStorageRepository implements PollRepository {
     return savedPolls;
   }
 
+  private storePolls(polls: Poll[]): void {
+    localStorage.setItem('polls', JSON.stringify(polls));
+  }
+
   save(poll: Poll): Observable<Poll> {
     const savedPolls = this.loadPolls();
     savedPolls.push(poll);
-    localStorage.setItem('polls', JSON.stringify(savedPolls));
+    this.storePolls(savedPolls);
     return of(poll);
   }
 
@@ -28,5 +32,23 @@ export class PollLocalStorageRepository implements PollRepository {
     const filtered = savedPolls.filter((currPoll) => currPoll.id !== poll.id);
     localStorage.setItem('polls', JSON.stringify(filtered));
     return EMPTY;
+  }
+
+  edit(poll: Poll): Observable<Poll> {
+    const savedPolls = this.loadPolls();
+    const edited = savedPolls.map((currPoll) => {
+      if (poll.id === currPoll.id) {
+        return poll;
+      }
+      return currPoll;
+    });
+
+    this.storePolls(edited);
+    return of(poll);
+  }
+
+  loadById(id: string): Observable<Poll | undefined> {
+    const savedPolls = this.loadPolls();
+    return of(savedPolls.find((currPoll) => currPoll.id === id));
   }
 }

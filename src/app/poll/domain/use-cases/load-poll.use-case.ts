@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
 import { PollGateway } from '../../data/poll.gateway';
 import { Poll } from '../models/poll';
 
 @Injectable()
-export class AddPollUseCase {
-
+export class LoadPollUseCase {
   constructor(private gateway: PollGateway) { }
 
-  addPoll(poll: Poll): Observable<Poll> {
-    poll.id = poll.id ?? uuidv4();
-    return this.gateway.createPoll(poll);
+  loadById(id: string): Observable<Poll | undefined> {
+    return this.gateway.loadById(id);
   }
 }

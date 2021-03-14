@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Poll } from 'src/app/poll/domain/models/poll';
 import { PollFirebaseRepository } from './poll-firebase.repository';
 import { PollLocalStorageRepository } from './poll-localstorage.repository';
-import { v4 as uuidv4 } from 'uuid';
+
 
 @Injectable()
 export class PollGateway {
@@ -15,9 +15,6 @@ export class PollGateway {
   ) { }
 
   createPoll(poll: Poll): Observable<Poll> {
-    poll.id = poll.id ?? uuidv4();
-
-
     if (this.userAuthenticated) {
       return this.loggedInRepository.save(poll);
     }
@@ -36,5 +33,19 @@ export class PollGateway {
       return this.loggedInRepository.delete(poll);
     }
     return this.loggedOutRepository.delete(poll);
+  }
+
+  edit(poll: Poll): Observable<Poll> {
+    if (this.userAuthenticated) {
+      return this.loggedInRepository.edit(poll);
+    }
+    return this.loggedOutRepository.edit(poll);
+  }
+
+  loadById(id: string): Observable<Poll | undefined> {
+    if (this.userAuthenticated) {
+      return this.loggedInRepository.loadById(id);
+    }
+    return this.loggedOutRepository.loadById(id);
   }
 }

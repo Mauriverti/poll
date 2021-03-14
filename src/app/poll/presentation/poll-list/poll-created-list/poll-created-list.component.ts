@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Poll } from 'src/app/poll/domain/models/poll';
 import { DeletePollUseCase } from 'src/app/poll/domain/use-cases/delete-poll.use-case';
@@ -16,6 +16,7 @@ export class PollCreatedListComponent {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private listPolls: ListPollsUseCase,
     private deletePoll: DeletePollUseCase,
   ) {
@@ -24,10 +25,14 @@ export class PollCreatedListComponent {
 
   newPoll(): void {
     console.log('new poll');
-    this.router.navigate([PollRoutes.NEW]);
+    this.router.navigate([`../${PollRoutes.NEW}`], { relativeTo: this.route });
   }
 
   delete(poll: Poll): Observable<void> {
     return this.deletePoll.delete(poll);
+  }
+
+  edit(poll: Poll): void {
+    this.router.navigate([`../${poll.id}/${PollRoutes.EDIT}`], { relativeTo: this.route });
   }
 }

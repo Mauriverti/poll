@@ -1,4 +1,9 @@
 <h1>poll created list</h1>
 <button (click)=newPoll()>New Poll</button>
 
-<poll-created-list-item *ngFor='let poll of polls$ | async' [poll]=poll (deletePoll)=delete(poll)></poll-created-list-item>
+<poll-created-list-item
+  *ngFor='let poll of polls$ | async'
+  [poll]=poll
+  (deletePoll)=delete(poll)
+  (editPoll)=edit(poll)
+></poll-created-list-item>

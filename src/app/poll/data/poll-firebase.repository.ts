@@ -18,4 +18,12 @@ export class PollFirebaseRepository implements PollRepository {
   delete(poll: Poll): Observable<void> {
     return EMPTY;
   }
+
+  edit(poll: Poll): Observable<Poll> {
+    return of(poll);
+  }
+
+  loadById(id: string): Observable<Poll | undefined> {
+    return of(undefined);
+  }
 }

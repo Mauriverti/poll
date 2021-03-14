@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutes } from 'src/app/shared/app-routes';
 import { LoginRoutes } from '../routing/login-routes';
 
@@ -12,7 +12,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
 
     this.loginForm = new FormGroup({
       email: new FormControl(),
@@ -30,6 +30,6 @@ export class LoginComponent {
 
   newAccount(): void {
     console.log('new account');
-    this.router.navigate([LoginRoutes.NEW]);
+    this.router.navigate([`../${LoginRoutes.NEW}`], { relativeTo: this.route });
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Poll } from '../../domain/models/poll';
 import { AddPollUseCase } from '../../domain/use-cases/add-poll.use-case';
 import { PollRoutes } from '../routing/poll-routes';
@@ -16,7 +16,8 @@ export class NewPollComponent {
 
   constructor(
     private createPoll: AddPollUseCase,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.newPoll = new FormGroup({
       title: new FormControl(),
@@ -46,6 +47,6 @@ export class NewPollComponent {
   }
 
   toList(): void {
-    this.router.navigate([PollRoutes.LIST]);
+    this.router.navigate([`../${PollRoutes.LIST}`], { relativeTo: this.route });
   }
 }
