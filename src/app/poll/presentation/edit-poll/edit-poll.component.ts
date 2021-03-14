@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Poll } from '../../domain/models/poll';
 import { EditPollUseCase } from '../../domain/use-cases/edit-poll.use-case';
 import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
 
@@ -26,6 +25,7 @@ export class EditPollComponent implements OnInit, OnDestroy {
   ) {
     this.editPoll = new FormGroup({
       id: new FormControl(),
+      createdBy: new FormControl(),
       title: new FormControl(),
       description: new FormControl(),
       public: new FormControl(false),

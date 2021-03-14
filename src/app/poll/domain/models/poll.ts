@@ -3,6 +3,6 @@ export class Poll {
   title?: string;
   description?: string;
   public?: boolean;
+  createdBy?: string;
   options?: string[];
-
 }

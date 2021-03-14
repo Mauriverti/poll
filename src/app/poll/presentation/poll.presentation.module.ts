@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EditPollComponent } from './edit-poll/edit-poll.component';
 import { NewPollComponent } from './new-poll/new-poll.component';
-import { PollAnsweredListComponent } from './poll-list/poll-answered-list/poll-answered-list.component';
+import { PollVoteListComponent } from './poll-list/poll-vote-list/poll-vote-list.component';
 import { PollCraetedListItemComponent } from './poll-list/poll-created-list-item/poll-created-list-item.component';
 import { PollCreatedListComponent } from './poll-list/poll-created-list/poll-created-list.component';
 import { PollListComponent } from './poll-list/poll-list.component';
@@ -33,7 +33,7 @@ import { PollRouting } from './routing/poll.routing';
   declarations: [
     PollComponent,
     PollListComponent,
-    PollAnsweredListComponent,
+    PollVoteListComponent,
     PollCreatedListComponent,
     PollCraetedListItemComponent,
     NewPollComponent,

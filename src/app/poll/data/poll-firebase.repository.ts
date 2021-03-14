@@ -7,7 +7,6 @@ import { PollRepository } from './poll.repository';
 export class PollFirebaseRepository implements PollRepository {
 
   save(poll: Poll): Observable<Poll> {
-    console.log('salvou firebase');
     return of(poll);
   }
 

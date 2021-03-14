@@ -1,6 +1,6 @@
 export enum PollRoutes {
   EDIT = 'edit',
-  ANSWER = 'answer',
+  VOTE = 'vote',
   LIST = 'list',
   NEW = 'new',
 }
