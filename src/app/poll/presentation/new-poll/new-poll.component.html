@@ -1,0 +1,29 @@
+<h1>new poll component</h1>
+
+<form [formGroup]='newPoll' fxLayout='column' fxLayoutAlign='start'>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input type='text' matInput formControlName='title'>
+  </mat-form-field>
+  <span>Public?</span>
+  <mat-slide-toggle color='primary' formControlName='public'></mat-slide-toggle>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input type='text' matInput formControlName='description'>
+  </mat-form-field>
+
+  <ng-container formArrayName="options">
+    <h3>Options</h3>
+    <mat-form-field *ngFor="let control of options.controls; index as i">
+      <mat-label>Add Option</mat-label>
+      <input type='text' matInput [formControlName]="i">
+      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeOption(i)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button type='button' (click)='addOption()'>Add Option</button>
+  </ng-container>
+</form>
+<pre>{{newPoll.value | json}}</pre>
+<button (click)=addPoll(newPoll)>Add</button>
+<button (click)=toList()>Go Back</button>

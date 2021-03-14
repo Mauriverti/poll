@@ -1,0 +1,14 @@
+<mat-card fxLayout='row' fxLayoutAlign='space-between center'>
+  <span>{{poll?.title}}</span>
+  <div>
+    <button mat-icon-button aria-label='share' (click)='share(poll)'>
+      <mat-icon>share</mat-icon>
+    </button>
+    <button mat-icon-button aria-label='edit' (click)='edit(poll)'>
+      <mat-icon>mode_edit</mat-icon>
+    </button>
+    <button mat-icon-button aria-label='delete' (click)='delete(poll)'>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>

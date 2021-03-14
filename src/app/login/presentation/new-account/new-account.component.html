@@ -1,0 +1,13 @@
+<h1>new account</h1>
+<form [formGroup]='newAccountForm' fxLayout='column' fxLayoutAlign='start'>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type='email' matInput formControlName='email' placeholder='Ex. email@example.com'>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input type='password' matInput formControlName='password'>
+  </mat-form-field>
+</form>
+<button (click)=create(newAccountForm)>Create Account</button>
+<button (click)=goBack()>Go Back</button>
