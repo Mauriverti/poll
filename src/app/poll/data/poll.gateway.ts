@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
 import { Poll } from 'src/app/poll/domain/models/poll';
+import { Vote } from '../domain/models/vote';
 import { PollFirebaseRepository } from './poll-firebase.repository';
 import { PollLocalStorageRepository } from './poll-localstorage.repository';
 
 
 @Injectable()
 export class PollGateway {
-  private userAuthenticated = false;
+  private userAuthenticated;
 
   constructor(
     private loggedInRepository: PollFirebaseRepository,
     private loggedOutRepository: PollLocalStorageRepository,
-  ) { }
+    private auth: AuthenticateUseCase,
+  ) {
+    this.userAuthenticated = !this.auth.fetchAuthData().anonymous;
+  }
 
   createPoll(poll: Poll): Observable<Poll> {
     if (this.userAuthenticated) {
@@ -47,5 +52,12 @@ export class PollGateway {
       return this.loggedInRepository.loadById(id);
     }
     return this.loggedOutRepository.loadById(id);
+  }
+
+  saveVote(vote: Vote): Observable<Vote> {
+    if (this.userAuthenticated) {
+      return this.loggedInRepository.saveVotes(vote);
+    }
+    return this.loggedOutRepository.saveVotes(vote);
   }
 }

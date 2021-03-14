@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable, of } from 'rxjs';
 import { Poll } from '../domain/models/poll';
+import { Vote } from '../domain/models/vote';
 import { PollRepository } from './poll.repository';
 
 @Injectable()
@@ -14,6 +15,16 @@ export class PollLocalStorageRepository implements PollRepository {
 
   private storePolls(polls: Poll[]): void {
     localStorage.setItem('polls', JSON.stringify(polls));
+  }
+
+  private loadVotes(): Vote[] {
+    const oldValues = localStorage.getItem('pollVotes');
+    const savedPolls: Vote[] = oldValues ? JSON.parse(oldValues) : [];
+    return savedPolls;
+  }
+
+  private storeVotes(votes: Vote[]): void {
+    localStorage.setItem('pollVotes', JSON.stringify(votes));
   }
 
   save(poll: Poll): Observable<Poll> {
@@ -50,5 +61,12 @@ export class PollLocalStorageRepository implements PollRepository {
   loadById(id: string): Observable<Poll | undefined> {
     const savedPolls = this.loadPolls();
     return of(savedPolls.find((currPoll) => currPoll.id === id));
+  }
+
+  saveVotes(vote: Vote): Observable<Vote> {
+    const savedVotes = this.loadVotes();
+    savedVotes.push(vote);
+    this.storeVotes(savedVotes);
+    return of(vote);
   }
 }

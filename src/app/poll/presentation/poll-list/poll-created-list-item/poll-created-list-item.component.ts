@@ -13,12 +13,11 @@ export class PollCraetedListItemComponent {
 
   @Output() deletePoll = new EventEmitter<Poll>();
   @Output() editPoll = new EventEmitter<Poll>();
+  @Output() votePoll = new EventEmitter<Poll>();
+  @Output() sharePoll = new EventEmitter<Poll>();
 
   share(currentPoll: Poll): void {
-    console.log('share');
-    if (currentPoll.id) {
-      const link = window.location.href.replace('/list', currentPoll.id);
-    }
+    this.sharePoll.emit(currentPoll);
   }
 
   edit(currentPoll: Poll): void {
@@ -27,5 +26,9 @@ export class PollCraetedListItemComponent {
 
   delete(currentPoll: Poll): void {
     this.deletePoll.emit(currentPoll);
+  }
+
+  vote(currentPoll: Poll): void {
+    this.votePoll.emit(currentPoll);
   }
 }

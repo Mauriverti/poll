@@ -4,6 +4,7 @@ import { EditPollComponent } from '../edit-poll/edit-poll.component';
 import { NewPollComponent } from '../new-poll/new-poll.component';
 import { PollListComponent } from '../poll-list/poll-list.component';
 import { PollComponent } from '../poll/poll.component';
+import { VotePollComponent } from '../vote-poll/vote-poll.component';
 
 /**
  * app
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'list', component: PollListComponent },
       { path: 'new', component: NewPollComponent },
       { path: ':id/edit', component: EditPollComponent },
+      { path: ':id/vote', component: VotePollComponent }
     ]
   }
 ];

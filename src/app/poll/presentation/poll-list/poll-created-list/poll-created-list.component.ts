@@ -35,4 +35,18 @@ export class PollCreatedListComponent {
   edit(poll: Poll): void {
     this.router.navigate([`../${poll.id}/${PollRoutes.EDIT}`], { relativeTo: this.route });
   }
+
+  vote(poll: Poll): void {
+    this.router.navigate([`../${poll.id}/${PollRoutes.VOTE}`], { relativeTo: this.route });
+  }
+
+  share(poll: Poll): void {
+    alert(this.createShareLink(poll)); // TODO, automatically copy to clipboard or open a dialog that do that
+  }
+
+  private createShareLink(poll: Poll): string {
+    let link = window.location.href;
+    link = link.replace('list', `${poll.id}/${PollRoutes.VOTE}`);
+    return link;
+  }
 }

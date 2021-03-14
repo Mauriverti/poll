@@ -12,12 +12,12 @@
     <input type='text' matInput formControlName='description'>
   </mat-form-field>
 
-  <ng-container formArrayName="options">
+  <ng-container formArrayName='options'>
     <h3>Options</h3>
-    <mat-form-field *ngFor="let control of options.controls; index as i">
+    <mat-form-field *ngFor='let control of options.controls; index as i'>
       <mat-label>Add Option</mat-label>
-      <input type='text' matInput [formControlName]="i">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="removeOption(i)">
+      <input type='text' matInput [formControlName]='i'>
+      <button mat-button matSuffix mat-icon-button aria-label='Clear' (click)='removeOption(i)'>
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>

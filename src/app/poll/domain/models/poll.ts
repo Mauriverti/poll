@@ -1,8 +1,10 @@
 export class Poll {
-  id?: string;
-  title?: string;
-  description?: string;
-  public?: boolean;
-  createdBy?: string;
-  options?: string[];
+  constructor(
+  public id: string,
+  public title: string,
+  public description: string,
+  public publicPoll: boolean,
+  public createdBy: string,
+  public options: string[]
+  ) { }
 }
