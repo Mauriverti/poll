@@ -24,7 +24,6 @@ export class PollCreatedListComponent {
   }
 
   newPoll(): void {
-    console.log('new poll');
     this.router.navigate([`../${PollRoutes.NEW}`], { relativeTo: this.route });
   }
 

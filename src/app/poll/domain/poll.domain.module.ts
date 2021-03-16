@@ -4,9 +4,10 @@ import { DeletePollUseCase } from './use-cases/delete-poll.use-case';
 import { EditPollUseCase } from './use-cases/edit-poll.use-case';
 import { ListPollsUseCase } from './use-cases/list-polls.use-case';
 import { LoadPollUseCase } from './use-cases/load-poll.use-case';
-import { VoteUseCase } from './use-cases/add-vote.use-case';
-import { LoadUserVotesUseCase } from './use-cases/load-user-votes.use-case';
+import { VoteUseCase } from './use-cases/vote.use-case';
+import { LoadVotesUseCase } from './use-cases/load-votes.use-case';
 import { DeleteVoteUseCase } from './use-cases/delete-vote.use-case';
+import { EditVoteUseCase } from './use-cases/edit-vote.use-case';
 
 @NgModule({
   providers: [
@@ -16,8 +17,9 @@ import { DeleteVoteUseCase } from './use-cases/delete-vote.use-case';
     LoadPollUseCase,
     EditPollUseCase,
     VoteUseCase,
-    LoadUserVotesUseCase,
+    LoadVotesUseCase,
     DeleteVoteUseCase,
+    EditVoteUseCase,
   ]
 })
 export class PollDomainModule { }

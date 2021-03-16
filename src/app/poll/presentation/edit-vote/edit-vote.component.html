@@ -1,0 +1,19 @@
+<h1>{{poll?.title}}</h1>
+<span>{{poll?.description}}</span>
+
+<div fxLayout='column'>
+
+  <form [formGroup]='editVoteForm'>
+    <mat-radio-group formControlName='option' color=primary required>
+      <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
+        {{opt}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <div>
+      <button [disabled]='!editVoteForm.valid' (click)=submit(editVoteForm)>Submit</button>
+      <button (click)=toList()>Back to voted poll list</button>
+    </div>
+  </form>
+
+  <pre>{{ editVoteForm.value | json}}</pre>
+</div>

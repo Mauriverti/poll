@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
 import { Poll } from '../../domain/models/poll';
-import { VoteUseCase } from '../../domain/use-cases/add-vote.use-case';
+import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
 import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
 
 @Component({

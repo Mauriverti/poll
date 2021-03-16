@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Vote } from 'src/app/poll/domain/models/vote';
 import { DeleteVoteUseCase } from 'src/app/poll/domain/use-cases/delete-vote.use-case';
-import { LoadUserVotesUseCase } from 'src/app/poll/domain/use-cases/load-user-votes.use-case';
+import { LoadVotesUseCase } from 'src/app/poll/domain/use-cases/load-votes.use-case';
+import { PollRoutes } from '../../routing/poll-routes';
 
 @Component({
   selector: 'poll-vote-list',
@@ -13,10 +15,12 @@ export class PollVoteListComponent {
   votes$: Observable<Vote[]>;
 
   constructor(
-    private loadVotes: LoadUserVotesUseCase,
+    private loadVotes: LoadVotesUseCase,
     private deleteVotes: DeleteVoteUseCase,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
-    this.votes$ = this.loadVotes.loadVotes();
+    this.votes$ = this.loadVotes.loadUserVotes();
   }
 
   delete(vote: Vote): void {
@@ -24,6 +28,6 @@ export class PollVoteListComponent {
   }
 
   edit(vote: Vote): void {
-    console.log('edit');
+    this.router.navigate([`../${vote.pollId}/${PollRoutes.VOTE}/${vote.id}`], { relativeTo: this.route });
   }
 }

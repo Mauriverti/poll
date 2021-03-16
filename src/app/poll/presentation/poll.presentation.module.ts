@@ -11,6 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EditPollComponent } from './edit-poll/edit-poll.component';
+import { EditVoteComponent } from './edit-vote/edit-vote.component';
 import { NewPollComponent } from './new-poll/new-poll.component';
 import { PollCraetedListItemComponent } from './poll-list/poll-created-list-item/poll-created-list-item.component';
 import { PollCreatedListComponent } from './poll-list/poll-created-list/poll-created-list.component';
@@ -46,6 +47,7 @@ import { VotePollComponent } from './vote-poll/vote-poll.component';
     EditPollComponent,
     VotePollComponent,
     VotePollListItemComponent,
+    EditVoteComponent,
   ]
 })
 export class PollPresentationModule { }

@@ -15,6 +15,15 @@ export class VoteUseCase {
   vote(vote: Vote): void {
     vote.id = uuidv4();
     vote.voter = this.auth.fetchAuthData().id;
+    this.saveVote(vote);
+  }
+
+  saveVote(vote: Vote): void {
     this.repository.saveVotes(vote);
   }
+
+  storeVotes(votes: Vote[]): void {
+    this.repository.storeVotes(votes);
+  }
+
 }
