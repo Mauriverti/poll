@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
 import { Poll } from 'src/app/poll/domain/models/poll';
-import { Vote } from '../domain/models/vote';
 import { PollFirebaseRepository } from './poll-firebase.repository';
 import { PollLocalStorageRepository } from './poll-localstorage.repository';
 
@@ -33,13 +32,6 @@ export class PollGateway {
     return this.loggedOutRepository.list();
   }
 
-  delete(poll: Poll): Observable<void> {
-    if (this.userAuthenticated) {
-      return this.loggedInRepository.delete(poll);
-    }
-    return this.loggedOutRepository.delete(poll);
-  }
-
   edit(poll: Poll): Observable<Poll> {
     if (this.userAuthenticated) {
       return this.loggedInRepository.edit(poll);
@@ -54,10 +46,17 @@ export class PollGateway {
     return this.loggedOutRepository.loadById(id);
   }
 
-  saveVote(vote: Vote): Observable<Vote> {
+  loadPolls(): Poll[] {
     if (this.userAuthenticated) {
-      return this.loggedInRepository.saveVotes(vote);
+      return this.loggedInRepository.loadPolls();
     }
-    return this.loggedOutRepository.saveVotes(vote);
+    return this.loggedOutRepository.loadPolls();
+  }
+
+  storePolls(polls: Poll[]): void {
+    if (this.userAuthenticated) {
+      return this.loggedInRepository.storePolls(polls);
+    }
+    return this.loggedOutRepository.storePolls(polls);
   }
 }

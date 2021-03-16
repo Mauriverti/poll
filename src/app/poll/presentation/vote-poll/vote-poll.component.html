@@ -5,7 +5,7 @@
 
   <form [formGroup]='voteForm'>
     <mat-radio-group formControlName='option' color=primary required>
-      <mat-radio-button *ngFor='let opt of poll?.options; index as i' [value]='i'>
+      <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
         {{opt}}
       </mat-radio-button>
     </mat-radio-group>

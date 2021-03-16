@@ -7,6 +7,13 @@ import { PollRepository } from './poll.repository';
 @Injectable()
 export class PollFirebaseRepository implements PollRepository {
 
+  loadPolls(): Poll[] {
+    const poll = new Poll('1', '2', '3', false, '5', ['6']);
+    return [poll];
+  }
+
+  storePolls(polls: Poll[]): void { }
+
   save(poll: Poll): Observable<Poll> {
     return of(poll);
   }

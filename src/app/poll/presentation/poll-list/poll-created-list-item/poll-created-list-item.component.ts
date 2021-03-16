@@ -7,9 +7,8 @@ import { Poll } from 'src/app/poll/domain/models/poll';
 })
 export class PollCraetedListItemComponent {
 
-  constructor() { }
-
   @Input() poll!: Poll;
+  @Input() canEdit = false;
 
   @Output() deletePoll = new EventEmitter<Poll>();
   @Output() editPoll = new EventEmitter<Poll>();

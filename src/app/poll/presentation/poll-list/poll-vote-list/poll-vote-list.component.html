@@ -1,1 +1,21 @@
 <h1>poll Votes list</h1>
+
+<div *ngIf='(votes$ | async) as votes; else loading'>
+
+  <div *ngIf='votes.length; else empty'>
+    <vote-poll-list-item
+      *ngFor='let vote of votes'
+      [vote]=vote
+      (deleteVote)=delete(vote)
+      (editVote)=edit(vote)
+    ></vote-poll-list-item>
+  </div>
+
+  <ng-template #empty>
+    <span>You didn't vote on any poll yet</span>
+  </ng-template>
+</div>
+
+<ng-template #loading>
+  <span>Loading...</span>
+</ng-template>

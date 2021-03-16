@@ -1,0 +1,15 @@
+<mat-card fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap='20px'>
+  <div>
+    <span>{{vote?.pollTitle}}</span>
+    <div></div>
+    <span>{{vote?.option}}</span>
+  </div>
+  <div>
+    <button mat-icon-button aria-label='edit' (click)='edit(vote)' matTooltip='Edit'>
+      <mat-icon>mode_edit</mat-icon>
+    </button>
+    <button mat-icon-button aria-label='delete' (click)='delete(vote)' matTooltip='Delete'>
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>

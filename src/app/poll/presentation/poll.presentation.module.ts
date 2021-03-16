@@ -15,6 +15,7 @@ import { NewPollComponent } from './new-poll/new-poll.component';
 import { PollCraetedListItemComponent } from './poll-list/poll-created-list-item/poll-created-list-item.component';
 import { PollCreatedListComponent } from './poll-list/poll-created-list/poll-created-list.component';
 import { PollListComponent } from './poll-list/poll-list.component';
+import { VotePollListItemComponent } from './poll-list/poll-vote-list-item/vote-poll-list-item.component';
 import { PollVoteListComponent } from './poll-list/poll-vote-list/poll-vote-list.component';
 import { PollComponent } from './poll/poll.component';
 import { PollRouting } from './routing/poll.routing';
@@ -44,6 +45,7 @@ import { VotePollComponent } from './vote-poll/vote-poll.component';
     NewPollComponent,
     EditPollComponent,
     VotePollComponent,
+    VotePollListItemComponent,
   ]
 })
 export class PollPresentationModule { }

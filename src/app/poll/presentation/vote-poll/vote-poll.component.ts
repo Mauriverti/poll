@@ -29,6 +29,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   ) {
     this.voteForm = new FormGroup({
       pollId: new FormControl(),
+      pollTitle: new FormControl(),
       option: new FormControl(),
     });
   }
@@ -62,7 +63,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
   initValues(poll: Poll): void {
     this.poll = poll;
-    this.voteForm.setValue({ pollId: poll.id, option: null });
+    this.voteForm.setValue({ pollId: poll.id, option: null, pollTitle: poll.title });
   }
 
   toAuth(): void {
