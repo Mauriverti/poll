@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AuthGateway } from './auth.gateway';
 import { AuthRepository } from './auth.repository';
+import { FirebaseRepository } from './firebase.repository';
 import { LocalStoreAuthRepository } from './local-store-auth.repository';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { LocalStoreAuthRepository } from './local-store-auth.repository';
       useClass: LocalStoreAuthRepository
     },
     AuthGateway,
+    FirebaseRepository,
   ]
 })
 export class AuthDataModule { }

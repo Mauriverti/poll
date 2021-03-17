@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NewAccountUseCase } from '../../domain/use-cases/new-account.use-case';
 
 @Component({
   selector: 'poll-new-accont',
@@ -10,7 +11,10 @@ export class NewAccountComponent {
 
   newAccountForm: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private newAccount: NewAccountUseCase,
+    ) {
     this.newAccountForm = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
@@ -18,7 +22,7 @@ export class NewAccountComponent {
   }
 
   create(newAccount: FormGroup): void {
-    console.log('create', newAccount.value);
+    this.newAccount.createAccount(newAccount.value);
   }
 
   goBack(): void {

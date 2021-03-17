@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "poll-786cd": {
+      "hosting": {
+        "poll": [
+          "poll-786cd"
+        ]
+      }
+    }
+  }
+}
