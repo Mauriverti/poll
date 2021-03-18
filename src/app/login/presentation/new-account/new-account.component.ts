@@ -23,6 +23,7 @@ export class NewAccountComponent {
 
   create(newAccount: FormGroup): void {
     this.newAccount.createAccount(newAccount.value);
+    this.goBack();
   }
 
   goBack(): void {

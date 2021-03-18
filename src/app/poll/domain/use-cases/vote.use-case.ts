@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
 import { v4 as uuidv4 } from 'uuid';
-import { VoteRepository } from '../../data/vote.repository';
+import { VoteGateway } from '../../data/vote.gateway';
 import { Vote } from '../models/vote';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class VoteUseCase {
 
   constructor(
     private auth: AuthenticateUseCase,
-    private repository: VoteRepository,
+    private gateway: VoteGateway,
   ) { }
 
   vote(vote: Vote): void {
@@ -19,11 +19,13 @@ export class VoteUseCase {
   }
 
   saveVote(vote: Vote): void {
-    this.repository.saveVotes(vote);
+    const savedVotes = this.gateway.loadVotes();
+    savedVotes.push(vote);
+    this.gateway.storeVotes(savedVotes);
   }
 
   storeVotes(votes: Vote[]): void {
-    this.repository.storeVotes(votes);
+    this.gateway.storeVotes(votes);
   }
 
 }

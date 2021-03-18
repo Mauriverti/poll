@@ -20,7 +20,7 @@ export class PollCreatedListComponent {
     private listPolls: ListPollsUseCase,
     private deletePoll: DeletePollUseCase,
   ) {
-    this.polls$ = this.listPolls.list();
+    this.polls$ = this.listPolls.listUserPolls();
   }
 
   newPoll(): void {

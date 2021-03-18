@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { VoteRepository } from '../../data/vote.repository';
+import { VoteGateway } from '../../data/vote.gateway';
 import { Vote } from '../models/vote';
 
 @Injectable()
 export class DeleteVoteUseCase {
 
-  constructor(
-    private repository: VoteRepository,
-  ) { }
+  constructor(private gateway: VoteGateway) { }
 
   deleteVote(vote: Vote): Observable<void> {
-    const savedVotes = this.repository.loadVotes();
+    const savedVotes = this.gateway.loadVotes();
     const deleted = savedVotes.filter(v => v.id !== vote.id);
-    this.repository.storeVotes(deleted);
+    this.gateway.storeVotes(deleted);
     return EMPTY;
   }
 
   deleteVoteByPollId(pollId: string): void {
-    const savedVotes = this.repository.loadVotes();
+    const savedVotes = this.gateway.loadVotes();
     const deleted = savedVotes.filter(v => v.pollId !== pollId);
-    this.repository.storeVotes(deleted);
+    this.gateway.storeVotes(deleted);
   }
 }

@@ -15,13 +15,6 @@ export class VoteRepository {
     localStorage.setItem('pollVotes', JSON.stringify(votes));
   }
 
-  saveVotes(vote: Vote): Observable<Vote> {
-    const savedVotes = this.loadVotes();
-    savedVotes.push(vote);
-    this.storeVotes(savedVotes);
-    return of(vote);
-  }
-
   fetchVotes(): Observable<Vote[]> {
     return of(this.loadVotes());
   }

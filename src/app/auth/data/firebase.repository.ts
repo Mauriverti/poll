@@ -19,22 +19,10 @@ export class FirebaseRepository {
 
   signUp(user: User): Observable<any> {
     return from(this.angularFireAuth.createUserWithEmailAndPassword(user.email, user.password));
-      // .then((res: any) => {
-      //   console.log('Successfully signed up!', res);
-      // })
-      // .catch((error: any) => {
-      //   console.log('Something is wrong:', error.message);
-      // });
   }
 
   signIn(user: User): Observable<any> {
     return from(this.angularFireAuth.signInWithEmailAndPassword(user.email, user.password));
-      // .then((res: any) => {
-      //   console.log('Successfully signed in!');
-      // })
-      // .catch((err: any) => {
-      //   console.log('Something is wrong:', err.message);
-      // });
   }
 
   signOut(): Observable<any> {

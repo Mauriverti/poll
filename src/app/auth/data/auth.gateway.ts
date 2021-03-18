@@ -33,4 +33,8 @@ export class AuthGateway {
   createAccount(user: User): Observable<any> {
     return this.firebaseRepository.signUp(user);
   }
+
+  clearAuth(): void {
+    this.repository.clearAuth();
+  }
 }

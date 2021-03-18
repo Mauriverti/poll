@@ -8,6 +8,7 @@ import { VoteUseCase } from './use-cases/vote.use-case';
 import { LoadVotesUseCase } from './use-cases/load-votes.use-case';
 import { DeleteVoteUseCase } from './use-cases/delete-vote.use-case';
 import { EditVoteUseCase } from './use-cases/edit-vote.use-case';
+import { MergeUsersUserCase } from './use-cases/merge-users.use-case';
 
 @NgModule({
   providers: [
@@ -20,6 +21,7 @@ import { EditVoteUseCase } from './use-cases/edit-vote.use-case';
     LoadVotesUseCase,
     DeleteVoteUseCase,
     EditVoteUseCase,
+    MergeUsersUserCase,
   ]
 })
 export class PollDomainModule { }

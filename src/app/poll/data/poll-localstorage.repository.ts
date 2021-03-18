@@ -16,30 +16,6 @@ export class PollLocalStorageRepository implements PollRepository {
     localStorage.setItem('polls', JSON.stringify(polls));
   }
 
-  save(poll: Poll): Observable<Poll> {
-    const savedPolls = this.loadPolls();
-    savedPolls.push(poll);
-    this.storePolls(savedPolls);
-    return of(poll);
-  }
-
-  list(): Observable<Poll[]> {
-    return of(this.loadPolls());
-  }
-
-  edit(poll: Poll): Observable<Poll> {
-    const savedPolls = this.loadPolls();
-    const edited = savedPolls.map((currPoll) => {
-      if (poll.id === currPoll.id) {
-        return poll;
-      }
-      return currPoll;
-    });
-
-    this.storePolls(edited);
-    return of(poll);
-  }
-
   loadById(id: string): Observable<Poll | undefined> {
     const savedPolls = this.loadPolls();
     return of(savedPolls.find((currPoll) => currPoll.id === id));

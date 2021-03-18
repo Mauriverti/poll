@@ -6,4 +6,5 @@ export abstract class AuthRepository {
 
   abstract loadAuth(): Auth | undefined;
   abstract saveAuth(auth: Auth): Auth;
+  abstract clearAuth(): void;
 }

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { PollFirebaseRepository } from './poll-firebase.repository';
 import { PollLocalStorageRepository } from './poll-localstorage.repository';
 import { PollGateway } from './poll.gateway';
+import { VoteGateway } from './vote.gateway';
 import { VoteRepository } from './vote.repository';
 
 @NgModule({
   providers: [
-    PollFirebaseRepository,
     PollLocalStorageRepository,
     PollGateway,
     VoteRepository,
+    VoteGateway,
   ]
 })
 export class PollDataModule { }

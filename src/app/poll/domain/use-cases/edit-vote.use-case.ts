@@ -16,13 +16,6 @@ export class EditVoteUseCase implements OnDestroy {
   ) { }
 
   editVote(vote: Vote): void {
-    // this.loadVotes.loadVotesById(vote.id)
-    // .pipe(takeUntil(this.destroyed$))
-    // .subscribe((vote) => {
-    //   if (vote) {
-    //     this.voteUseCase.saveVote(vote);
-    //   }
-    // });
     this.loadVotes.loadVotes().pipe(
       takeUntil(this.destroyed$)
     ).subscribe((votes) => {

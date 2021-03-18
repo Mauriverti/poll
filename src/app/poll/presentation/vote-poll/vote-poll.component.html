@@ -1,20 +1,29 @@
-<h1>{{poll?.title}}</h1>
-<span>{{poll?.description}}</span>
 
 <div fxLayout='column'>
 
-  <form [formGroup]='voteForm'>
-    <mat-radio-group formControlName='option' color=primary required>
-      <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
-        {{opt}}
-      </mat-radio-button>
-    </mat-radio-group>
-    <div>
-      <button [disabled]='!voteForm.valid' (click)=submit(voteForm)>Submit</button>
-      <button (click)=clear()>Clear</button>
-      <button (click)=toList()>Back to created poll list</button>
-    </div>
-  </form>
+  <div *ngIf='!userCanVote; else votePoll'>
+    <span>Oops, to vote this poll you must be authenticated!</span>
+    <button (click)=toLogin()>login</button>
+  </div>
+
+  <ng-template #votePoll>
+    <h1>{{poll?.title}}</h1>
+    <span>{{poll?.description}}</span>
+
+    <form [formGroup]='voteForm'>
+      <mat-radio-group formControlName='option' color=primary required>
+        <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
+          {{opt}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button [disabled]='!voteForm.valid' (click)=submit(voteForm)>Submit</button>
+        <button (click)=clear()>Clear</button>
+      </div>
+    </form>
+  </ng-template>
+  <button (click)=toList()>Back to created poll list</button>
 
   <pre>{{ voteForm.value | json}}</pre>
+  <pre>{{ userCanVote | json }}</pre>
 </div>

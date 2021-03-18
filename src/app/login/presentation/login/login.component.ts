@@ -36,8 +36,8 @@ export class LoginComponent implements OnDestroy {
     ).subscribe((user) => {
       console.log('user', user);
       this.loginUseCase.storeCredentials(user.user.uid);
+      this.toDefaultModule();
     });
-
   }
 
   toDefaultModule(): void {

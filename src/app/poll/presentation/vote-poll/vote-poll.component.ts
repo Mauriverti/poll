@@ -7,6 +7,7 @@ import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.
 import { Poll } from '../../domain/models/poll';
 import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
 import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
+import { AppRoutes } from 'src/app/shared/app-routes';
 
 @Component({
   selector: 'vote-poll',
@@ -19,6 +20,8 @@ export class VotePollComponent implements OnInit, OnDestroy {
   poll?: Poll;
 
   voteForm: FormGroup;
+
+  userCanVote?: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +38,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const pollId = routeParams.get('id');
+    const pollId = this.getPollId();
 
     console.log('pollId', pollId);
     if (pollId) {
@@ -46,7 +48,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
         next: (poll) => {
           console.log('poll', poll);
           if (poll) {
-            this.validatePublic(poll.publicPoll);
+            this.userCanSeePoll(poll.publicPoll);
             this.initValues(poll);
           }
         }
@@ -56,11 +58,17 @@ export class VotePollComponent implements OnInit, OnDestroy {
     }
   }
 
-  validatePublic(publicPoll?: boolean): void {
-    if (!publicPoll && this.auth.fetchAuthData().anonymous) {
-      this.toAuth();
-    }
+  private getPollId(): string | null {
+    const routeParams = this.route.snapshot.paramMap;
+    return routeParams.get('id');
   }
+
+  userCanSeePoll(publicPoll?: boolean): void {
+    console.log('public poll?', publicPoll);
+    console.log('anonymous', this.auth.fetchAuthData().anonymous);
+    this.userCanVote = publicPoll || !this.auth.fetchAuthData().anonymous;
+  }
+
   initValues(poll: Poll): void {
     this.poll = poll;
     this.voteForm.setValue({ pollId: poll.id, option: null, pollTitle: poll.title });
@@ -86,5 +94,11 @@ export class VotePollComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  toLogin(): void {
+    const pollId = this.getPollId();
+    console.log('toLogin');
+    this.router.navigate([AppRoutes.LOGIN]);
   }
 }

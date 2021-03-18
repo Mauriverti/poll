@@ -1,3 +1,8 @@
 export class Auth {
-  constructor(public id: string, public anonymous = true) { }
+  constructor(
+    /** user identifier */
+    public id: string,
+    /** identify if a user is logged in or not */
+    public anonymous = true
+    ) { }
 }

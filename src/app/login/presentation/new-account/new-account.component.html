@@ -6,7 +6,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input type='password' matInput formControlName='password'>
+    <input minlength='6' type='password' matInput formControlName='password'>
   </mat-form-field>
 </form>
 <button (click)=create(newAccountForm)>Create Account</button>

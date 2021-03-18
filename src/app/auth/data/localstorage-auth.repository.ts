@@ -3,7 +3,7 @@ import { Auth } from '../domain/model/auth';
 import { AuthRepository } from './auth.repository';
 
 @Injectable()
-export class LocalStoreAuthRepository implements AuthRepository {
+export class LocalStorageAuthRepository implements AuthRepository {
 
   loadAuth(): Auth | undefined {
     const stored = localStorage.getItem('pollAuth');
@@ -15,4 +15,9 @@ export class LocalStoreAuthRepository implements AuthRepository {
     localStorage.setItem('pollAuth', JSON.stringify(auth));
     return auth;
   }
+
+  clearAuth(): void {
+    localStorage.removeItem('pollAuth');
+  }
+
 }

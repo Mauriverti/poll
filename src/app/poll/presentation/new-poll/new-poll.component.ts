@@ -22,7 +22,7 @@ export class NewPollComponent {
     this.newPoll = new FormGroup({
       title: new FormControl(),
       description: new FormControl(),
-      public: new FormControl(false),
+      publicPoll: new FormControl(false),
       options: new FormArray([new FormControl('')]),
     });
 
