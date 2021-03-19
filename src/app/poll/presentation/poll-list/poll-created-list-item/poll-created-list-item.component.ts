@@ -19,6 +19,7 @@ export class PollCraetedListItemComponent implements OnInit, OnDestroy {
   @Output() editPoll = new EventEmitter<Poll>();
   @Output() votePoll = new EventEmitter<Poll>();
   @Output() sharePoll = new EventEmitter<Poll>();
+  @Output() resultsPoll = new EventEmitter<Poll>();
 
   constructor(private voteUseCase: LoadVotesUseCase) { }
 
@@ -49,5 +50,9 @@ export class PollCraetedListItemComponent implements OnInit, OnDestroy {
 
   vote(currentPoll: Poll): void {
     this.votePoll.emit(currentPoll);
+  }
+
+  results(currentPoll: Poll): void {
+    this.resultsPoll.emit(currentPoll);
   }
 }

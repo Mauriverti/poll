@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
+import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { VoteGateway } from '../../data/vote.gateway';
 import { Vote } from '../models/vote';
 
@@ -10,13 +10,13 @@ export class LoadVotesUseCase {
 
   constructor(
     private gateway: VoteGateway,
-    private auth: AuthenticateUseCase,
+    private service: SessionService,
   ) { }
 
   loadUserVotes(): Observable<Vote[]> {
     return this.gateway.fetchVotes().pipe(
       // just show user votes
-      map((votes) => votes.filter((vote) => vote.voter === this.auth.fetchAuthData().id))
+      map((votes) => votes.filter((vote) => vote.voter === this.service.fetchAuthData().id))
     );
   }
 

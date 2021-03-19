@@ -3,8 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Auth } from 'src/app/auth/domain/model/auth';
+import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { AppRoutes } from 'src/app/shared/app-routes';
-import { LoginUseCase } from '../../domain/use-cases/login.use-case';
+import { LoginService } from '../../domain/services/login.service';
 import { LoginRoutes } from '../routing/login-routes';
 
 @Component({
@@ -19,7 +21,8 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private loginUseCase: LoginUseCase,
+    private loginService: LoginService,
+    private sessionService: SessionService,
   ) {
 
     this.loginForm = new FormGroup({
@@ -31,11 +34,11 @@ export class LoginComponent implements OnDestroy {
   login(loginForm: FormGroup): void {
     console.log('login', loginForm.value);
 
-    this.loginUseCase.login(loginForm.value).pipe(
+    this.loginService.login(loginForm.value).pipe(
       takeUntil(this.destroyed$)
     ).subscribe((user) => {
       console.log('user', user);
-      this.loginUseCase.storeCredentials(user.user.uid);
+      this.sessionService.storeCredentials(new Auth(user.user.uid, false));
       this.toDefaultModule();
     });
   }

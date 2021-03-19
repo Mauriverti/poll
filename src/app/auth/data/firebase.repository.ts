@@ -3,11 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 import { User } from 'src/app/login/domain/models/user';
 
-interface UserCredential {
-  idToken: string;
-  email: string;
-}
-
 @Injectable()
 export class FirebaseRepository {
 

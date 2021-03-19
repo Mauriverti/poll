@@ -1,10 +1,9 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
+import { takeUntil } from 'rxjs/operators';
+import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { Poll } from '../../domain/models/poll';
 import { Vote } from '../../domain/models/vote';
 import { EditVoteUseCase } from '../../domain/use-cases/edit-vote.use-case';
@@ -24,7 +23,7 @@ export class EditVoteComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private auth: AuthenticateUseCase,
+    private sessionService: SessionService,
     private loadPolls: LoadPollUseCase,
     private editVote: EditVoteUseCase,
     private loadVotes: LoadVotesUseCase,
@@ -67,7 +66,7 @@ export class EditVoteComponent implements OnInit, OnDestroy {
   }
 
   validatePublic(publicPoll?: boolean): void {
-    if (!publicPoll && this.auth.fetchAuthData().anonymous) {
+    if (!publicPoll && this.sessionService.fetchAuthData().anonymous) {
       this.toAuth();
     }
   }

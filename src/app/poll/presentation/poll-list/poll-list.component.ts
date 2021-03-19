@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
+import { LoginService } from 'src/app/login/domain/services/login.service';
 import { AppRoutes } from 'src/app/shared/app-routes';
 
 @Component({
@@ -11,8 +11,8 @@ export class PollListComponent {
 
   constructor(
     private router: Router,
-    private auth: AuthenticateUseCase,
-    ) { }
+    private auth: LoginService,
+  ) { }
 
   logoff(): void {
     this.auth.logout();

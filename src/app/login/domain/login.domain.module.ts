@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { LoginUseCase } from './use-cases/login.use-case';
+import { LoginService } from './services/login.service';
 import { NewAccountUseCase } from './use-cases/new-account.use-case';
 
 @NgModule({
-  providers: [LoginUseCase, NewAccountUseCase]
+  providers: [LoginService, NewAccountUseCase]
 })
 export class LoginDomainModule { }

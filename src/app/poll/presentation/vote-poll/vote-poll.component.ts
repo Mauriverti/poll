@@ -3,11 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AuthenticateUseCase } from 'src/app/auth/domain/use-cases/authenticate.use-case';
-import { Poll } from '../../domain/models/poll';
-import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
-import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
+import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { AppRoutes } from 'src/app/shared/app-routes';
+import { Poll } from '../../domain/models/poll';
+import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
+import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
 
 @Component({
   selector: 'vote-poll',
@@ -27,7 +27,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private loadPolls: LoadPollUseCase,
-    private auth: AuthenticateUseCase,
+    private sessionService: SessionService,
     private vote: VoteUseCase,
   ) {
     this.voteForm = new FormGroup({
@@ -65,8 +65,8 @@ export class VotePollComponent implements OnInit, OnDestroy {
 
   userCanSeePoll(publicPoll?: boolean): void {
     console.log('public poll?', publicPoll);
-    console.log('anonymous', this.auth.fetchAuthData().anonymous);
-    this.userCanVote = publicPoll || !this.auth.fetchAuthData().anonymous;
+    console.log('anonymous', this.sessionService.fetchAuthData().anonymous);
+    this.userCanVote = publicPoll || !this.sessionService.fetchAuthData().anonymous;
   }
 
   initValues(poll: Poll): void {

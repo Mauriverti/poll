@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AuthenticateUseCase } from './use-cases/authenticate.use-case';
+import { SessionService } from './services/session.service';
 
 @NgModule({
-  providers: [AuthenticateUseCase]
+  providers: [
+    SessionService
+  ]
 })
 export class AuthDomainModule { }

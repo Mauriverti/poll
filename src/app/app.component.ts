@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateUseCase } from './auth/domain/use-cases/authenticate.use-case';
+import { SessionService } from './auth/domain/services/session.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,8 @@ import { AuthenticateUseCase } from './auth/domain/use-cases/authenticate.use-ca
 })
 export class AppComponent implements OnInit {
 
-  constructor(private auth: AuthenticateUseCase) { }
+  constructor(private service: SessionService) { }
   ngOnInit(): void {
-    this.auth.initAuth();
+    this.service.initAuth();
   }
 }
