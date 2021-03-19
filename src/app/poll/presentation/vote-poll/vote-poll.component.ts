@@ -97,8 +97,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   toLogin(): void {
-    const pollId = this.getPollId();
-    console.log('toLogin');
+    this.getPollId();
     this.router.navigate([AppRoutes.LOGIN]);
   }
 }

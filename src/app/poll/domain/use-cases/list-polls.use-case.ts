@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SessionService } from 'src/app/auth/domain/services/session.service';
-import { PollGateway } from '../../data/poll.gateway';
+import { PollFirebaseRepository } from '../../data/poll-firebase.repository';
 import { Poll } from '../models/poll';
 
 @Injectable()
 export class ListPollsUseCase {
 
   constructor(
-    private gateway: PollGateway,
     private service: SessionService,
+    private repository: PollFirebaseRepository,
   ) { }
 
   listUserPolls(): Observable<Poll[]> {
@@ -23,6 +23,6 @@ export class ListPollsUseCase {
   }
 
   list(): Observable<Poll[]> {
-    return of(this.gateway.loadPolls());
+    return this.repository.loadPolls();
   }
 }

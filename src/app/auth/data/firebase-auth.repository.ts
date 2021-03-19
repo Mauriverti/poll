@@ -3,10 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Auth } from '../domain/model/auth';
-import { AuthRepository } from './auth.repository';
 
 @Injectable()
-export class FirebaseAuthRepository implements AuthRepository {
+export class FirebaseAuthRepository {
 
   private readonly collection = 'auth';
 

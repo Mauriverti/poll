@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Poll } from '../domain/models/poll';
 import { PollRepository } from './poll.repository';
 

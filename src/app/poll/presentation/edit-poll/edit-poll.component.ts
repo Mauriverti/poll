@@ -28,7 +28,7 @@ export class EditPollComponent implements OnInit, OnDestroy {
       createdBy: new FormControl(),
       title: new FormControl(),
       description: new FormControl(),
-      public: new FormControl(false),
+      publicPoll: new FormControl(false),
       options: new FormArray([]),
     });
 

@@ -5,7 +5,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
-import { AuthGateway } from './auth.gateway';
 import { FirebaseAuthRepository } from './firebase-auth.repository';
 import { FirebaseRepository } from './firebase.repository';
 import { LocalStorageAuthRepository } from './localstorage-auth.repository';
@@ -19,13 +18,8 @@ import { LocalStorageAuthRepository } from './localstorage-auth.repository';
     AngularFireStorageModule,
   ],
   providers: [
-    // {
-    //   provide: AuthRepository,
-    //   useClass: FirebaseAuthRepository
-    // },
     LocalStorageAuthRepository,
     FirebaseAuthRepository,
-    AuthGateway,
     FirebaseRepository,
   ]
 })

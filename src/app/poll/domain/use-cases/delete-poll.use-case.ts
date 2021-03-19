@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
-import { PollGateway } from '../../data/poll.gateway';
+import { PollFirebaseRepository } from '../../data/poll-firebase.repository';
 import { Poll } from '../models/poll';
 import { DeleteVoteUseCase } from './delete-vote.use-case';
 
@@ -8,15 +7,12 @@ import { DeleteVoteUseCase } from './delete-vote.use-case';
 export class DeletePollUseCase {
 
   constructor(
-    private gateway: PollGateway,
+    private repository: PollFirebaseRepository,
     private deleteVote: DeleteVoteUseCase,
   ) { }
 
-  delete(poll: Poll): Observable<void> {
-    const savedPolls = this.gateway.loadPolls();
-    const filtered = savedPolls.filter((currPoll) => currPoll.id !== poll.id);
-    this.gateway.storePolls(filtered);
+  delete(poll: Poll): void {
+    this.repository.deletePoll(poll);
     this.deleteVote.deleteVoteByPollId(poll.id);
-    return EMPTY;
   }
 }

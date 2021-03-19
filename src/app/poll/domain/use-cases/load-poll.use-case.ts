@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PollGateway } from '../../data/poll.gateway';
+import { PollFirebaseRepository } from '../../data/poll-firebase.repository';
 import { Poll } from '../models/poll';
 
 @Injectable()
 export class LoadPollUseCase {
-  constructor(private gateway: PollGateway) { }
+  constructor(private repository: PollFirebaseRepository) { }
 
   loadById(id: string): Observable<Poll | undefined> {
-    return this.gateway.loadById(id);
+    return this.repository.loadById(id);
   }
 }

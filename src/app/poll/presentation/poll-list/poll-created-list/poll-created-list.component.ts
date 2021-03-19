@@ -27,7 +27,7 @@ export class PollCreatedListComponent {
     this.router.navigate([`../${PollRoutes.NEW}`], { relativeTo: this.route });
   }
 
-  delete(poll: Poll): Observable<void> {
+  delete(poll: Poll): void {
     return this.deletePoll.delete(poll);
   }
 

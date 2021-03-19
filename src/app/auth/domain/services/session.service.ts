@@ -23,7 +23,6 @@ export class SessionService {
 
   /** creates a new session with a new user, if user already have a session, merge both */
   async storeCredentials(auth: Auth): Promise<void> {
-    debugger;
     const oldAuth = this.localRepository.loadAuth();
     if (oldAuth) {
       this.migrateUsers.mergeUsers(oldAuth.id, auth.id);

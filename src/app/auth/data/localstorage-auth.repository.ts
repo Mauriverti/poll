@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '../domain/model/auth';
-import { AuthRepository } from './auth.repository';
 
 @Injectable()
-export class LocalStorageAuthRepository implements AuthRepository {
+export class LocalStorageAuthRepository {
 
   loadAuth(): Auth | undefined {
     const stored = localStorage.getItem('pollAuth');
