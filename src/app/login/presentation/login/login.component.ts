@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +16,7 @@ import { LoginRoutes } from '../routing/login-routes';
 export class LoginComponent implements OnDestroy {
 
   loginForm: FormGroup;
+  private readonly emailRegex = /\S+@\S+\.\S+/;
   destroyed$ = new Subject<void>();
 
   constructor(
@@ -26,8 +27,14 @@ export class LoginComponent implements OnDestroy {
   ) {
 
     this.loginForm = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.pattern(this.emailRegex)
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(6),
+      ])
     });
   }
 
@@ -36,10 +43,15 @@ export class LoginComponent implements OnDestroy {
 
     this.loginService.login(loginForm.value).pipe(
       takeUntil(this.destroyed$)
-    ).subscribe((user) => {
-      console.log('user', user);
-      this.sessionService.storeCredentials(new Auth(user.user.uid, false));
-      this.toDefaultModule();
+    ).subscribe({
+      next: (user) => {
+        console.log('user', user);
+        this.sessionService.storeCredentials(new Auth(user.user.uid, false));
+        this.toDefaultModule();
+      },
+      error: (error: { message: string }) => {
+        this.showErrorMessage(error.message);
+      }
     });
   }
 
@@ -55,5 +67,9 @@ export class LoginComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.destroyed$.next();
     this.destroyed$.complete();
+  }
+
+  showErrorMessage(message: string): void {
+    alert(message);
   }
 }
