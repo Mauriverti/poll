@@ -1,23 +1,36 @@
-import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
-import { VoteGateway } from '../../data/vote.gateway';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { VoteFirebaseRepository } from '../../data/vote-firebase.repository';
 import { Vote } from '../models/vote';
 
 @Injectable()
-export class DeleteVoteUseCase {
+export class DeleteVoteUseCase implements OnDestroy {
 
-  constructor(private gateway: VoteGateway) { }
+  destroyed$ = new Subject<void>();
 
-  deleteVote(vote: Vote): Observable<void> {
-    const savedVotes = this.gateway.loadVotes();
-    const deleted = savedVotes.filter(v => v.id !== vote.id);
-    this.gateway.storeVotes(deleted);
-    return EMPTY;
+  constructor(private repository: VoteFirebaseRepository) { }
+
+  deleteVote(vote: Vote): void {
+    this.repository.deleteVote(vote);
   }
 
   deleteVoteByPollId(pollId: string): void {
-    const savedVotes = this.gateway.loadVotes();
-    const deleted = savedVotes.filter(v => v.pollId !== pollId);
-    this.gateway.storeVotes(deleted);
+    this.repository.loadVotes().pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe({
+      next: (votes) => {
+        votes.forEach(vote => {
+          if (vote.pollId === pollId) {
+            this.repository.deleteVote(vote);
+          }
+        });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

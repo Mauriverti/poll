@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PollFirebaseRepository } from '../../data/poll-firebase.repository';
-import { VoteGateway } from '../../data/vote.gateway';
+import { VoteFirebaseRepository } from '../../data/vote-firebase.repository';
 
 @Injectable()
 export class MergeUsersUserCase {
@@ -11,7 +11,7 @@ export class MergeUsersUserCase {
 
   constructor(
     private pollRepository: PollFirebaseRepository,
-    private voteGateway: VoteGateway,
+    private voteRepository: VoteFirebaseRepository,
   ) { }
 
   /** It Migrates all created polls and votes from a user to another */
@@ -36,14 +36,15 @@ export class MergeUsersUserCase {
 
   /** It Migrates all votes from a user to another */
   mergeVotes(previousUserId: string, newUserId: string): void {
-    const savedVotes = this.voteGateway.loadVotes();
-
-    const edited = savedVotes.map((currVote) => {
-      if (currVote.voter === previousUserId) {
-        currVote.voter = newUserId;
+    this.voteRepository.loadVotesByCreator(previousUserId).pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe({
+      next: (votes) => {
+        votes.forEach(vote => {
+          vote.voter = newUserId;
+          this.voteRepository.editVote(vote);
+        });
       }
-      return currVote;
     });
-    this.voteGateway.storeVotes(edited);
   }
 }

@@ -3,10 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Poll } from '../domain/models/poll';
-import { PollRepository } from './poll.repository';
 
 @Injectable()
-export class PollFirebaseRepository implements PollRepository {
+export class PollFirebaseRepository {
 
   private readonly collection = 'poll';
 
@@ -25,11 +24,6 @@ export class PollFirebaseRepository implements PollRepository {
       map(polls => polls.filter(poll => poll.createdBy === id))
     );
   }
-
-
-  // storePolls(polls: Poll[]): void {
-  //   localStorage.setItem('polls', JSON.stringify(polls));
-  // }
 
   async storePoll(poll: Poll): Promise<void> {
     await this.db.collection(this.collection).doc(poll.id).set({

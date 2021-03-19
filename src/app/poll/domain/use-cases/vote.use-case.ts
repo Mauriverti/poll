@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { v4 as uuidv4 } from 'uuid';
-import { VoteGateway } from '../../data/vote.gateway';
+import { VoteFirebaseRepository } from '../../data/vote-firebase.repository';
 import { Vote } from '../models/vote';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class VoteUseCase {
 
   constructor(
     private sessionService: SessionService,
-    private gateway: VoteGateway,
+    private repository: VoteFirebaseRepository,
   ) { }
 
   vote(vote: Vote): void {
@@ -19,13 +19,6 @@ export class VoteUseCase {
   }
 
   saveVote(vote: Vote): void {
-    const savedVotes = this.gateway.loadVotes();
-    savedVotes.push(vote);
-    this.gateway.storeVotes(savedVotes);
+    this.repository.storeVote(vote);
   }
-
-  storeVotes(votes: Vote[]): void {
-    this.gateway.storeVotes(votes);
-  }
-
 }
