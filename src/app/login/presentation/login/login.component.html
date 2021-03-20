@@ -14,7 +14,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input type='password' matInput formControlName='password'>
+      <input type='password' matInput formControlName='password' (keyup.enter)='login(loginForm)' >
       <mat-error *ngIf='loginForm.controls.password.hasError("required")'>
         Please enter your password
       </mat-error>

@@ -27,9 +27,11 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-      <button mat-icon-button (click)='addOption()' matTooltip='Add Option'>
-        <mat-icon>exposure_plus_1</mat-icon>
-      </button>
+      <div>
+        <button mat-stroked-button color='primary' (click)='addOption()'>
+          <span>Add Option</span>
+        </button>
+      </div>
     </ng-container>
   </form>
 

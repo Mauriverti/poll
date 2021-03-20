@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input type='password' matInput formControlName='password'>
+      <input type='password' matInput formControlName='password' (keyup.enter)='create(newAccountForm)'>
       <mat-error *ngIf="newAccountForm.controls.password.hasError('minlength')">
         Password must contain at least 6 characters
       </mat-error>
