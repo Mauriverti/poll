@@ -11,7 +11,8 @@ import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
 
 @Component({
   selector: 'vote-poll',
-  templateUrl: 'vote-poll.component.html'
+  styleUrls: ['./vote-poll.component.sass'],
+  templateUrl: './vote-poll.component.html'
 })
 export class VotePollComponent implements OnInit, OnDestroy {
 
@@ -62,7 +63,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   userCanSeePoll(publicPoll?: boolean): void {
-    this.userCanVote = publicPoll || !this.sessionService.fetchAuthData().anonymous;
+    this.userCanVote = !!(publicPoll || !this.sessionService.fetchAuthData().anonymous);
   }
 
   initValues(poll: Poll): void {

@@ -1,5 +1,3 @@
-<h1>poll Votes list</h1>
-
 <div *ngIf='(votes$ | async) as votes; else loading'>
 
   <div *ngIf='votes.length; else empty'>

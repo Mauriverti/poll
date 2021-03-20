@@ -1,29 +1,35 @@
 
-<div fxLayout='column'>
+<div class='container' fxLayout='column' [ngSwitch]='userCanVote' fxLayoutGap='8px'>
 
-  <div *ngIf='!userCanVote; else votePoll'>
-    <span>Oops, to vote this poll you must be authenticated!</span>
-    <button (click)=toLogin()>login</button>
+  <div *ngSwitchCase='undefined'>
+    <span>Loading..</span>
   </div>
 
-  <ng-template #votePoll>
-    <h1>{{poll?.title}}</h1>
-    <span>{{poll?.description}}</span>
+  <div *ngSwitchCase='false' fxLayout='column' fxLayoutGap='8px'>
+    <span>Oops, to vote this poll you must be authenticated!</span>
+    <div>
+      <button mat-raised-button color='primary' (click)=toLogin()>login</button>
+    </div>
+  </div>
 
-    <form [formGroup]='voteForm'>
-      <mat-radio-group formControlName='option' color=primary required>
+  <div *ngSwitchCase='true'>
+    <h2>{{poll?.title}}</h2>
+    <h4>{{poll?.description}}</h4>
+
+    <form [formGroup]='voteForm' fxLayout='column' fxLayoutGap='8px'>
+      <mat-radio-group formControlName='option' color=primary required fxLayout='column' fxLayoutGap='8px'>
         <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
           {{opt}}
         </mat-radio-button>
       </mat-radio-group>
-      <div>
-        <button [disabled]='!voteForm.valid' (click)=submit(voteForm)>Submit</button>
-        <button (click)=clear()>Clear</button>
+      <div fxLayoutGap='8px' fxLayoutAlign='start center'>
+        <button mat-raised-button color='primary' [disabled]='!voteForm.valid' (click)=submit(voteForm)>Submit</button>
+        <button mat-stroked-button color='primary' (click)=clear()>Clear</button>
       </div>
     </form>
-  </ng-template>
-  <button (click)=toList()>Back to created poll list</button>
+  </div>
+  <div>
+    <button mat-stroked-button color='primary' (click)=toList()>Back to created poll list</button>
+  </div>
 
-  <pre>{{ voteForm.value | json}}</pre>
-  <pre>{{ userCanVote | json }}</pre>
 </div>

@@ -1,8 +1,7 @@
 <mat-card fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap='20px'>
-  <div>
-    <span>{{vote?.pollTitle}}</span>
-    <div></div>
-    <span>{{vote?.option}}</span>
+  <div fxLayout='column' fxLayoutGap='4px'>
+    <span>Poll: <strong>{{vote?.pollTitle}}</strong></span>
+    <span>You vote: <strong>{{vote?.option}}</strong></span>
   </div>
   <div>
     <button mat-icon-button aria-label='edit' (click)='edit(vote)' matTooltip='Edit'>

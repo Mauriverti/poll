@@ -1,19 +1,22 @@
-<h1>{{poll?.title}}</h1>
-<span>{{poll?.description}}</span>
+<div class='container' fxLayout='column' fxLayoutGap='8px'>
+  <div>
+    <h2>{{poll?.title}}</h2>
+    <h4>{{poll?.description}}</h4>
 
-<div fxLayout='column'>
+    <form [formGroup]='editVoteForm' fxLayout='column' fxLayoutGap='8px'>
+      <mat-radio-group formControlName='option' color=primary required fxLayout='column' fxLayoutGap='8px'>
+        <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
+          {{opt}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div fxLayoutGap='8px' fxLayoutAlign='start center'>
+        <button mat-raised-button color='primary' [disabled]='!editVoteForm.valid' (click)=submit(editVoteForm)>Submit</button>
+        <button mat-stroked-button color='primary' (click)=clear()>Clear</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <button mat-stroked-button color='primary' (click)=toList()>Back to created poll list</button>
+  </div>
 
-  <form [formGroup]='editVoteForm'>
-    <mat-radio-group formControlName='option' color=primary required>
-      <mat-radio-button *ngFor='let opt of poll?.options' [value]='opt'>
-        {{opt}}
-      </mat-radio-button>
-    </mat-radio-group>
-    <div>
-      <button [disabled]='!editVoteForm.valid' (click)=submit(editVoteForm)>Submit</button>
-      <button (click)=toList()>Back to voted poll list</button>
-    </div>
-  </form>
-
-  <pre>{{ editVoteForm.value | json}}</pre>
 </div>
