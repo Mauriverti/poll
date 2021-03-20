@@ -1,5 +1,6 @@
-<h1>poll created list</h1>
-<button (click)=newPoll()>New Poll</button>
+<div fxLayout='row' fxLayoutAlign='end center'>
+  <button mat-raised-button color='primary' (click)=newPoll()>New Poll</button>
+</div>
 
 <div *ngIf='(polls$ | async) as polls; else loading'>
   <div *ngIf='polls.length; else empty'>

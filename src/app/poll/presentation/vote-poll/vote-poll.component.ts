@@ -40,13 +40,11 @@ export class VotePollComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const pollId = this.getPollId();
 
-    console.log('pollId', pollId);
     if (pollId) {
       this.loadPolls.loadById(pollId).pipe(
         takeUntil(this.destroyed$)
       ).subscribe({
         next: (poll) => {
-          console.log('poll', poll);
           if (poll) {
             this.userCanSeePoll(poll.publicPoll);
             this.initValues(poll);
@@ -64,8 +62,6 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   userCanSeePoll(publicPoll?: boolean): void {
-    console.log('public poll?', publicPoll);
-    console.log('anonymous', this.sessionService.fetchAuthData().anonymous);
     this.userCanVote = publicPoll || !this.sessionService.fetchAuthData().anonymous;
   }
 

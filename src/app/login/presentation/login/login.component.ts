@@ -41,13 +41,10 @@ export class LoginComponent implements OnDestroy {
   }
 
   login(loginForm: FormGroup): void {
-    console.log('login', loginForm.value);
-
     this.loginService.login(loginForm.value).pipe(
       takeUntil(this.destroyed$)
     ).subscribe({
       next: (user) => {
-        console.log('user', user);
         this.sessionService.storeCredentials(new Auth(user.user.uid, false));
         this.toDefaultModule();
       },
@@ -62,7 +59,6 @@ export class LoginComponent implements OnDestroy {
   }
 
   newAccount(): void {
-    console.log('new account');
     this.router.navigate([`../${LoginRoutes.NEW}`], { relativeTo: this.route });
   }
 

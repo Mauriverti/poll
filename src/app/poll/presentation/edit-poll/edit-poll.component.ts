@@ -8,7 +8,8 @@ import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
 
 @Component({
   selector: 'edit-poll',
-  templateUrl: 'edit-poll.component.html'
+  styleUrls: ['./edit-poll.component.sass'],
+  templateUrl: './edit-poll.component.html'
 })
 export class EditPollComponent implements OnInit, OnDestroy {
 
@@ -39,13 +40,11 @@ export class EditPollComponent implements OnInit, OnDestroy {
     const routeParams = this.route.snapshot.paramMap;
     const pollId = routeParams.get('id');
 
-    console.log('pollId', pollId);
     if (pollId) {
       this.loadPolls.loadById(pollId).pipe(
         takeUntil(this.destroyed$)
       ).subscribe({
         next: (poll) => {
-          console.log('poll', poll);
           if (poll) {
             this.initiateOptions(poll.options?.length ?? 0);
             this.editPoll.setValue(poll);
@@ -78,7 +77,6 @@ export class EditPollComponent implements OnInit, OnDestroy {
   }
 
   addOption(): void {
-    console.log('controls', this.editPoll.controls.options);
     const options = this.editPoll.get('options') as FormArray;
     options.push(new FormControl(''));
   }

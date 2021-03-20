@@ -7,6 +7,7 @@ import { PollRoutes } from '../routing/poll-routes';
 
 @Component({
   selector: 'new-poll',
+  styleUrls: ['./new-poll.component.sass'],
   templateUrl: './new-poll.component.html'
 })
 export class NewPollComponent {
@@ -30,13 +31,11 @@ export class NewPollComponent {
   }
 
   addPoll(poll: FormGroup): void {
-    console.log(poll.value);
     this.createPoll.addPoll(poll.value as Poll);
     this.toList();
   }
 
   addOption(): void {
-    console.log('controls', this.newPoll.controls.options);
     const options = this.newPoll.get('options') as FormArray;
     options.push(new FormControl(''));
   }
