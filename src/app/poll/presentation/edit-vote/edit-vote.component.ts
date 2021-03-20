@@ -12,6 +12,7 @@ import { LoadVotesUseCase } from '../../domain/use-cases/load-votes.use-case';
 
 @Component({
   selector: 'edit-vote',
+  styleUrls: ['./edit-vote.component.sass'],
   templateUrl: 'edit-vote.component.html'
 })
 export class EditVoteComponent implements OnInit, OnDestroy {

@@ -3,8 +3,7 @@ import { SessionService } from './auth/domain/services/session.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
