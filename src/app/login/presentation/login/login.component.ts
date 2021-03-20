@@ -11,6 +11,7 @@ import { LoginRoutes } from '../routing/login-routes';
 
 @Component({
   selector: 'poll-login',
+  styleUrls: ['./login.component.sass'],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnDestroy {
@@ -34,6 +35,7 @@ export class LoginComponent implements OnDestroy {
       ]),
       password: new FormControl('', [
         Validators.minLength(6),
+        Validators.required
       ])
     });
   }

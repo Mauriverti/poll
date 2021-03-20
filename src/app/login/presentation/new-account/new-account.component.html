@@ -1,23 +1,27 @@
-<h1>new account</h1>
-<form [formGroup]='newAccountForm' fxLayout='column' fxLayoutAlign='start'>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input type='email' matInput formControlName='email' placeholder='Ex. email@example.com'>
-    <mat-error *ngIf="newAccountForm.controls.email.hasError('email') || newAccountForm.controls.email.hasError('pattern') && !newAccountForm.controls.email.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="newAccountForm.controls.email.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input type='password' matInput formControlName='password'>
-    <mat-error *ngIf="newAccountForm.controls.password.hasError('minlength')">
-      Password must contain at least 6 characters
-    </mat-error>
-  </mat-form-field>
-</form>
+<div fxLayout='column' fxLayoutAlign.gt-xs='space-around center'>
+  <h3>New account</h3>
+  <form [formGroup]='newAccountForm' fxLayout='column' fxLayoutAlign='start' class='form'>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type='email' matInput formControlName='email' placeholder='Ex. email@example.com'>
+      <mat-error *ngIf="newAccountForm.controls.email.hasError('email') || newAccountForm.controls.email.hasError('pattern') && !newAccountForm.controls.email.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="newAccountForm.controls.email.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type='password' matInput formControlName='password'>
+      <mat-error *ngIf="newAccountForm.controls.password.hasError('minlength')">
+        Password must contain at least 6 characters
+      </mat-error>
+    </mat-form-field>
+  </form>
 
-<button [disabled]=!newAccountForm.valid (click)=create(newAccountForm)>Create Account</button>
-<button (click)=goBack()>Go Back</button>
+  <div fxLayoutGap='8px' fxLayout='column' fxLayout.gt-xs='row'>
+    <button mat-raised-button color='primary' [disabled]=!newAccountForm.valid (click)=create(newAccountForm)>Create Account</button>
+    <button mat-stroked-button color='primary' (click)=goBack()>Go Back</button>
+  </div>
+</div>

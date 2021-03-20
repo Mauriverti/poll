@@ -7,6 +7,7 @@ import { NewAccountUseCase } from '../../domain/use-cases/new-account.use-case';
 
 @Component({
   selector: 'poll-new-accont',
+  styleUrls: ['./new-account.component.sass'],
   templateUrl: './new-account.component.html'
 })
 export class NewAccountComponent implements OnDestroy {
@@ -28,6 +29,7 @@ export class NewAccountComponent implements OnDestroy {
       ]),
       password: new FormControl('', [
         Validators.minLength(6),
+        Validators.required
       ])
     });
   }
