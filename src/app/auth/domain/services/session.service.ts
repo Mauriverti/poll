@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MergeUsersUserCase } from 'src/app/poll/domain/use-cases/merge-users.use-case';
+import { v4 as uuidv4 } from 'uuid';
 import { FirebaseAuthRepository } from '../../data/firebase-auth.repository';
 import { LocalStorageAuthRepository } from '../../data/localstorage-auth.repository';
-import { v4 as uuidv4 } from 'uuid';
-import { MergeUsersUserCase } from 'src/app/poll/domain/use-cases/merge-users.use-case';
 import { Auth } from '../model/auth';
 
 @Injectable()
@@ -55,7 +55,6 @@ export class SessionService {
     const auth = this.loadAuth();
     if (auth && !auth.anonymous) {
       this.localRepository.clearAuth();
-      // this.globalRepository.clearAuth(auth.id);
     }
   }
 }

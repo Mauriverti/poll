@@ -6,11 +6,7 @@ import { User } from 'src/app/login/domain/models/user';
 @Injectable()
 export class FirebaseRepository {
 
-  userData: Observable<any>;
-
-  constructor(private angularFireAuth: AngularFireAuth) {
-    this.userData = angularFireAuth.authState;
-  }
+  constructor(private angularFireAuth: AngularFireAuth) { }
 
   signUp(user: User): Observable<any> {
     return from(this.angularFireAuth.createUserWithEmailAndPassword(user.email, user.password));

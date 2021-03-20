@@ -2,10 +2,10 @@
 
   <div>
 
-    <h2>Result</h2>
-    <h3>{{poll?.title}}</h3>
-    <h4>{{poll?.description}}</h4>
-
+    <h2>{{poll?.title}}</h2>
+    <h3>{{poll?.description}}</h3>
+    <mat-divider></mat-divider>
+    <h4>Votes:</h4>
     <div *ngFor='let result of results'>
       <p>{{result.option}}: <strong>{{result.ammount}}</strong></p>
     </div>

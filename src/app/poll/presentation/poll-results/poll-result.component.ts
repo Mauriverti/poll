@@ -13,6 +13,7 @@ interface Result {
 
 @Component({
   selector: 'poll-result',
+  styleUrls: ['./poll-result.component.sass'],
   templateUrl: './poll-result.component.html'
 })
 export class PollResultComponent implements OnInit, OnDestroy {
