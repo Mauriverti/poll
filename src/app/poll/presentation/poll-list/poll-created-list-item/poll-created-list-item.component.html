@@ -7,7 +7,7 @@
     <button mat-icon-button aria-label='vote' (click)='vote(poll)' matTooltip='Vote'>
       <mat-icon>how_to_vote</mat-icon>
     </button>
-    <button mat-icon-button aria-label='Results' (click)='vote(poll)' matTooltip='Results'>
+    <button mat-icon-button aria-label='Results' (click)='results(poll)' matTooltip='Results'>
       <mat-icon>bar_chart</mat-icon>
     </button>
     <div [matTooltip]="canEdit ? 'Edit' : 'Polls that are already voted can\'t be edited'">

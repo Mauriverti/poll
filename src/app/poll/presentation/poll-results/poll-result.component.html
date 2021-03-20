@@ -1,0 +1,17 @@
+<div class='container' fxLayout='column' fxLayoutGap='8px'>
+
+  <div>
+
+    <h2>Result</h2>
+    <h3>{{poll?.title}}</h3>
+    <h4>{{poll?.description}}</h4>
+
+    <div *ngFor='let result of results'>
+      <p>{{result.option}}: <strong>{{result.ammount}}</strong></p>
+    </div>
+  </div>
+  <div>
+    <button mat-stroked-button color='primary' (click)=toList()>Back to created poll list</button>
+  </div>
+
+</div>

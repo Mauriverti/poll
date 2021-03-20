@@ -4,17 +4,17 @@
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input type='email' matInput formControlName='email' placeholder='Ex. email@example.com'>
-      <mat-error *ngIf="newAccountForm.controls.email.hasError('email') || newAccountForm.controls.email.hasError('pattern') && !newAccountForm.controls.email.hasError('required')">
+      <mat-error *ngIf='newAccountForm.controls.email.hasError("email") || newAccountForm.controls.email.hasError("pattern") && !newAccountForm.controls.email.hasError("required")'>
         Please enter a valid email address
       </mat-error>
-      <mat-error *ngIf="newAccountForm.controls.email.hasError('required')">
+      <mat-error *ngIf='newAccountForm.controls.email.hasError("required")'>
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input type='password' matInput formControlName='password' (keyup.enter)='create(newAccountForm)'>
-      <mat-error *ngIf="newAccountForm.controls.password.hasError('minlength')">
+      <mat-error *ngIf='newAccountForm.controls.password.hasError("minlength")'>
         Password must contain at least 6 characters
       </mat-error>
     </mat-form-field>

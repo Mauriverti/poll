@@ -3,4 +3,5 @@ export enum PollRoutes {
   VOTE = 'vote',
   LIST = 'list',
   NEW = 'new',
+  RESULT = 'result'
 }

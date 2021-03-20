@@ -39,6 +39,10 @@ export class PollCreatedListComponent {
     this.router.navigate([`../${poll.id}/${PollRoutes.VOTE}`], { relativeTo: this.route });
   }
 
+  toResult(poll: Poll): void {
+    this.router.navigate([`../${poll.id}/${PollRoutes.RESULT}`], { relativeTo: this.route });
+  }
+
   share(poll: Poll): void {
     alert(this.createShareLink(poll)); // TODO, automatically copy to clipboard or open a dialog that do that
   }

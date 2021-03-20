@@ -4,6 +4,7 @@ import { EditPollComponent } from '../edit-poll/edit-poll.component';
 import { EditVoteComponent } from '../edit-vote/edit-vote.component';
 import { NewPollComponent } from '../new-poll/new-poll.component';
 import { PollListComponent } from '../poll-list/poll-list.component';
+import { PollResultComponent } from '../poll-results/poll-result.component';
 import { PollComponent } from '../poll/poll.component';
 import { VotePollComponent } from '../vote-poll/vote-poll.component';
 
@@ -13,8 +14,9 @@ import { VotePollComponent } from '../vote-poll/vote-poll.component';
  *    |- list
  *    |  |- created-list
  *    |  |  '- edit-poll
- *    |  '- vote-list
- *    |     '- edit-vote
+ *    |  |- vote-list
+ *    |  |  '- edit-vote
+ *    |  '- result
  *    '- new
  *
  */
@@ -28,6 +30,7 @@ const routes: Routes = [
       { path: 'new', component: NewPollComponent },
       { path: ':id/edit', component: EditPollComponent },
       { path: ':id/vote', component: VotePollComponent },
+      { path: ':id/result', component: PollResultComponent },
       { path: ':id/vote/:voteId', component: EditVoteComponent },
     ]
   }

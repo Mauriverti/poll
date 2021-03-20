@@ -50,6 +50,13 @@ export class VoteFirebaseRepository {
     );
   }
 
+  loadByPoll(pollId: string): Observable<Vote[]> {
+    const savedVotes = this.loadVotes();
+    return savedVotes.pipe(
+      map((votes) => votes.filter(vote => vote.pollId === pollId))
+    );
+  }
+
   deleteVote(vote: Vote): void {
     this.db.collection(this.collection).doc(vote.id).delete();
   }
