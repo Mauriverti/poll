@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './shared/app-routes';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: AppRoutes.LOGIN, pathMatch: 'full' },
-  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
-  { path: 'poll', loadChildren: () => import('./poll/poll.module').then(m => m.PollModule) },
+  { path: AppRoutes.LOGIN, loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: AppRoutes.POLL, loadChildren: () => import('./poll/poll.module').then(m => m.PollModule) },
 ];
 
 @NgModule({

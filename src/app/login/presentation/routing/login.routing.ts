@@ -9,7 +9,7 @@ import { NewAccountComponent } from '../new-account/new-account.component';
  *    '- new
  */
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '', children: [
       { path: '', component: LoginComponent },

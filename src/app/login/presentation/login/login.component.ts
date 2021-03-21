@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Auth } from 'src/app/auth/domain/model/auth';
 import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { AppRoutes } from 'src/app/shared/app-routes';
+import { User } from '../../domain/models/user';
 import { LoginService } from '../../domain/services/login.service';
 import { LoginRoutes } from '../routing/login-routes';
 
@@ -41,7 +42,7 @@ export class LoginComponent implements OnDestroy {
   }
 
   login(loginForm: FormGroup): void {
-    this.loginService.login(loginForm.value).pipe(
+    this.loginService.login(loginForm.value as User).pipe(
       takeUntil(this.destroyed$)
     ).subscribe({
       next: (user) => {
@@ -68,6 +69,7 @@ export class LoginComponent implements OnDestroy {
   }
 
   showErrorMessage(message: string): void {
+    // TODO, user a better method to display feedbacks.. like toats or dialogs
     alert(message);
   }
 }

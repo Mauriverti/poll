@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SessionService } from 'src/app/auth/domain/services/session.service';
 import { AppRoutes } from 'src/app/shared/app-routes';
 import { Poll } from '../../domain/models/poll';
+import { Vote } from '../../domain/models/vote';
 import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
 import { VoteUseCase } from '../../domain/use-cases/vote.use-case';
 
@@ -47,7 +48,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
       ).subscribe({
         next: (poll) => {
           if (poll) {
-            this.userCanSeePoll(poll.publicPoll);
+            this.userCanSeePoll(poll.publicPoll, this.sessionService.fetchAuthData().anonymous);
             this.initValues(poll);
           }
         }
@@ -62,8 +63,8 @@ export class VotePollComponent implements OnInit, OnDestroy {
     return routeParams.get('id');
   }
 
-  userCanSeePoll(publicPoll?: boolean): void {
-    this.userCanVote = !!(publicPoll || !this.sessionService.fetchAuthData().anonymous);
+  userCanSeePoll(publicPoll?: boolean, anonymousUser?: boolean): void {
+    this.userCanVote = !!(publicPoll || !anonymousUser);
   }
 
   initValues(poll: Poll): void {
@@ -84,7 +85,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   submit(form: FormGroup): void {
-    this.vote.vote(form.value);
+    this.vote.vote(form.value as Vote);
     this.toList();
   }
 
@@ -94,7 +95,7 @@ export class VotePollComponent implements OnInit, OnDestroy {
   }
 
   toLogin(): void {
-    this.getPollId();
+    // TODO, make user come back to the poll after log in
     this.router.navigate([AppRoutes.LOGIN]);
   }
 }

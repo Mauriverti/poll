@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Poll } from '../../domain/models/poll';
 import { EditPollUseCase } from '../../domain/use-cases/edit-poll.use-case';
 import { LoadPollUseCase } from '../../domain/use-cases/load-poll.use-case';
 
@@ -56,7 +57,7 @@ export class EditPollComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initiateOptions(length: number): void {
+  initiateOptions(length: number): void {
     for (let i = 0; i < length ; i++) {
       this.addOption();
     }
@@ -72,7 +73,7 @@ export class EditPollComponent implements OnInit, OnDestroy {
   }
 
   savePoll(form: FormGroup): void {
-    this.editPollUseCase.editPoll(form.value);
+    this.editPollUseCase.editPoll(form.value as Poll);
     this.toList();
   }
 

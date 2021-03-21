@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { User } from '../../domain/models/user';
 import { NewAccountUseCase } from '../../domain/use-cases/new-account.use-case';
 
 @Component({
@@ -35,7 +36,7 @@ export class NewAccountComponent implements OnDestroy {
   }
 
   create(newAccount: FormGroup): void {
-    this.newAccount.createAccount(newAccount.value).pipe(
+    this.newAccount.createAccount(newAccount.value as User).pipe(
       takeUntil(this.destroyed$)
     ).subscribe({
       next: () => this.goBack(),

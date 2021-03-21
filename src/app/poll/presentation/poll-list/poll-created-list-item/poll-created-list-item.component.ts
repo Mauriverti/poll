@@ -24,7 +24,7 @@ export class PollCraetedListItemComponent implements OnInit, OnDestroy {
   constructor(private voteUseCase: LoadVotesUseCase) { }
 
   ngOnInit(): void {
-    this.voteUseCase.pollWithVotes(this.poll.id).pipe(
+    this.voteUseCase.pollWithVotes(this.poll?.id).pipe(
       takeUntil(this.destroyed$)
     ).subscribe({
       next: (hasVotes) => this.canEdit = !hasVotes

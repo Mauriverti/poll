@@ -47,7 +47,7 @@ export class PollCreatedListComponent {
     alert(this.createShareLink(poll)); // TODO, automatically copy to clipboard or open a dialog that do that
   }
 
-  private createShareLink(poll: Poll): string {
+  createShareLink(poll: Poll): string {
     let link = window.location.href;
     link = link.replace('list', `${poll.id}/${PollRoutes.VOTE}`);
     return link;
