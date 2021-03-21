@@ -28,7 +28,8 @@ export class PollCreatedListComponent {
   }
 
   delete(poll: Poll): void {
-    return this.deletePoll.delete(poll);
+    this.deletePoll.delete(poll);
+    this.polls$ = this.listPolls.listUserPolls();
   }
 
   edit(poll: Poll): void {

@@ -25,6 +25,7 @@ export class PollVoteListComponent {
 
   delete(vote: Vote): void {
     this.deleteVotes.deleteVote(vote);
+    this.votes$ = this.loadVotes.loadUserVotes();
   }
 
   edit(vote: Vote): void {
