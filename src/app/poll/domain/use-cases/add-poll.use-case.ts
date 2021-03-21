@@ -17,7 +17,7 @@ export class AddPollUseCase {
     this.repository.storePoll(poll);
   }
 
-  private prepareEntity(poll: Poll): Poll {
+  prepareEntity(poll: Poll): Poll {
     poll.id = uuidv4();
     poll.createdBy = this.service.fetchAuthData().id;
     return poll;
